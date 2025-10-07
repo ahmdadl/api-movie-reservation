@@ -1,0 +1,31 @@
+{
+    "name": "ahmdadl/core",
+    "description": "",
+    "authors": [
+        {
+            "name": "Ahmed Adel",
+            "email": "ahmdadl.dev@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Core\\": "app/",
+            "Modules\\Core\\Database\\Factories\\": "database/factories/",
+            "Modules\\Core\\Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "app/Helpers/helper_functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Core\\Tests\\": "tests/"
+        }
+    }
+}

@@ -1,0 +1,18 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Spatie\LaravelData\Attributes\MapInputName;
+use Spatie\LaravelData\Attributes\Validation as V;
+use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Mappers\CamelCaseMapper;
+
+#[MapInputName(CamelCaseMapper::class)]
+class $CLASS$ extends Data
+{
+    public function __construct(
+        // 
+    ) {
+        // 
+    }
+}

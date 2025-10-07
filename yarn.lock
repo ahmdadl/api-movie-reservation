@@ -204,6 +204,14 @@
     "@emnapi/runtime" "^1.5.0"
     "@tybys/wasm-util" "^0.10.1"
 
+"@prettier/plugin-php@^0.24.0":
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/@prettier/plugin-php/-/plugin-php-0.24.0.tgz#c7e84dac73aa45109cfa0a0c73301063fdb3dc9f"
+  integrity sha512-x9l65fCE/pgoET6RQowgdgG8Xmzs44z6j6Hhg3coINCyCw9JBGJ5ZzMR2XHAM2jmAdbJAIgqB6cUn4/3W3XLTA==
+  dependencies:
+    linguist-languages "^8.0.0"
+    php-parser "^3.2.5"
+
 "@rollup/rollup-android-arm-eabi@4.52.4":
   version "4.52.4"
   resolved "https://registry.yarnpkg.com/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.52.4.tgz#59e7478d310f7e6a7c72453978f562483828112f"
@@ -665,6 +673,11 @@ lightningcss@1.30.1:
     lightningcss-win32-arm64-msvc "1.30.1"
     lightningcss-win32-x64-msvc "1.30.1"
 
+linguist-languages@^8.0.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/linguist-languages/-/linguist-languages-8.2.0.tgz#d8f60eeaf0a97f04d5a4f6eb6190e39ebaf200d4"
+  integrity sha512-KCUUH9x97QWYU0SXOCGxUrZR6cSfuQrMhABB7L/0I8N0LXOeaKe7+RZs7FAwvWCV2qKfZ4Wv1luLq4OfMezSJg==
+
 magic-string@^0.30.19:
   version "0.30.19"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.19.tgz#cebe9f104e565602e5d2098c5f2e79a77cc86da9"
@@ -693,6 +706,11 @@ npm-check-updates@^19.0.0:
   version "19.0.0"
   resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-19.0.0.tgz#6e6d078412b2f18b5265773f1da85d0d6806f994"
   integrity sha512-qcfjZEv6xB+WvW24S8wU1MKISPPiTREraBg62XDo/7zmOLXH3Zj7ti2v/LRfks0qITU8SDZLTWwgIitflvursw==
+
+php-parser@^3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/php-parser/-/php-parser-3.2.5.tgz#24ff4b4f3e1788967f7737e43c273a5a8e7cd0ac"
+  integrity sha512-M1ZYlALFFnESbSdmRtTQrBFUHSriHgPhgqtTF/LCbZM4h7swR5PHtUceB2Kzby5CfqcsYwBn7OXTJ0+8Sajwkw==
 
 picocolors@^1.0.0, picocolors@^1.1.1:
   version "1.1.1"

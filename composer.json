@@ -1,11 +1,12 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "nunomaduro/laravel-starter-kit",
+    "name": "ahmdadl/api-movie-reservation",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "API for movie reservation",
     "keywords": [
-        "laravel",
-        "framework"
+        "api",
+        "movie",
+        "reservation"
     ],
     "license": "MIT",
     "require": {

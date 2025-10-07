@@ -13,9 +13,13 @@ declare(strict_types=1);
 |
 */
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
+use Illuminate\Support\Str;
+use function Pest\Laravel\withoutExceptionHandling;
 
-pest()->extend(Tests\TestCase::class)
+pest()
+    ->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->beforeEach(function () {
         Str::createRandomStringsNormally();
@@ -25,7 +29,10 @@ pest()->extend(Tests\TestCase::class)
 
         $this->freezeTime();
     })
-    ->in('Browser', 'Feature', 'Unit');
+    ->in("Browser", "Feature", "Unit", "../Modules/*/tests/**/*Test.php")
+    ->beforeAll(function () {
+        withoutExceptionHandling();
+    });
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +45,7 @@ pest()->extend(Tests\TestCase::class)
 |
 */
 
-expect()->extend('toBeOne', function () {
+expect()->extend("toBeOne", function () {
     return $this->toBe(1);
 });
 
