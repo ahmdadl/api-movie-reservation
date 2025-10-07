@@ -16,48 +16,48 @@ final class ModuleDtoMakeCommand extends GeneratorCommand
 {
     use ModuleCommandTrait;
 
-    protected $argumentName = 'name';
+    protected $argumentName = "name";
 
-    protected $name = 'module:make-dto';
+    protected $name = "module:make-dto";
 
-    protected $description = 'Create a new DTO class for the specified module.';
+    protected $description = "Create a new DTO class for the specified module.";
 
     public function getDestinationFilePath(): string
     {
-        $path = $this->laravel['modules']->getModulePath(
-            $this->getModuleName()
+        $path = $this->laravel["modules"]->getModulePath(
+            $this->getModuleName(),
         );
 
         $filePath =
-            GenerateConfigReader::read('dto')->getPath() ??
-            config('modules.paths.app_folder').'DTO';
+            GenerateConfigReader::read("dto")->getPath() ??
+            config("modules.paths.app_folder");
 
-        return $path.$filePath.'/'.$this->getDTOName().'.php';
+        return $path . $filePath . "/" . $this->getDTOName() . ".php";
     }
 
     public function getDefaultNamespace(): string
     {
-        return config('modules.paths.generator.dto.namespace', 'DTO');
+        return config("modules.paths.generator.dto.namespace", "Data");
     }
 
     protected function getTemplateContents(): string
     {
-        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+        $module = $this->laravel["modules"]->findOrFail($this->getModuleName());
 
-        return (new Stub($this->getStubName(), [
-            'CLASS_NAMESPACE' => $this->getClassNamespace($module),
-            'CLASS' => $this->getClassNameWithoutNamespace(),
-        ]))->render();
+        return new Stub($this->getStubName(), [
+            "CLASS_NAMESPACE" => $this->getClassNamespace($module),
+            "CLASS" => $this->getClassNameWithoutNamespace(),
+        ])->render();
     }
 
     protected function getArguments(): array
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the DTO class.'],
+            ["name", InputArgument::REQUIRED, "The name of the DTO class."],
             [
-                'module',
+                "module",
                 InputArgument::OPTIONAL,
-                'The name of module will be used.',
+                "The name of module will be used.",
             ],
         ];
     }
@@ -66,22 +66,22 @@ final class ModuleDtoMakeCommand extends GeneratorCommand
     {
         return [
             [
-                'force',
-                'f',
+                "force",
+                "f",
                 InputOption::VALUE_NONE,
-                'Create the class even if the DTO already exists.',
+                "Create the class even if the DTO already exists.",
             ],
         ];
     }
 
     protected function getDTOName(): string
     {
-        return Str::studly($this->argument('name')).'DTO';
+        return Str::studly($this->argument("name"));
     }
 
     protected function getStubName(): string
     {
-        return '/dto.stub';
+        return "/dto.stub";
     }
 
     private function getClassNameWithoutNamespace(): string

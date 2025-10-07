@@ -49,6 +49,6 @@ final class BlueprintMixins
      */
     public function uid()
     {
-        return fn () => $this->ulid('id')->unique()->primary();
+        return fn () => $this->uuid('id')->primary();
     }
 }

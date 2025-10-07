@@ -1,5 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
+$modulesPath = base_path("Modules");
+
+$moduleDataDirs = [];
+if (is_dir($modulesPath)) {
+    foreach (scandir($modulesPath) as $moduleName) {
+        if ($moduleName === "." || $moduleName === "..") {
+            continue;
+        }
+        $dataPath = $modulesPath . "/" . $moduleName . "/Data";
+        if (is_dir($dataPath)) {
+            $moduleDataDirs[] = $dataPath;
+        }
+    }
+}
+
 return [
     /*
      * The package will use this format when working with dates. If this option
@@ -37,9 +54,9 @@ return [
      */
     "transformers" => [
         DateTimeInterface::class =>
-            \Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer::class,
-        \Illuminate\Contracts\Support\Arrayable::class =>
-            \Spatie\LaravelData\Transformers\ArrayableTransformer::class,
+            Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer::class,
+        Illuminate\Contracts\Support\Arrayable::class =>
+            Spatie\LaravelData\Transformers\ArrayableTransformer::class,
         BackedEnum::class =>
             Spatie\LaravelData\Transformers\EnumTransformer::class,
     ],
@@ -110,7 +127,7 @@ return [
      */
     "structure_caching" => [
         "enabled" => true,
-        "directories" => [app_path("Data"), module_path("Core", "app/Data")],
+        "directories" => array_merge([app_path("Data")], $moduleDataDirs),
         "cache" => [
             "store" => env("CACHE_STORE", env("CACHE_DRIVER", "file")),
             "prefix" => "laravel-data",
@@ -129,7 +146,7 @@ return [
      * behaviour can be changed to always validate or to completely disable validation.
      */
     "validation_strategy" =>
-        \Spatie\LaravelData\Support\Creation\ValidationStrategy::OnlyRequests
+        Spatie\LaravelData\Support\Creation\ValidationStrategy::OnlyRequests
             ->value,
 
     /*

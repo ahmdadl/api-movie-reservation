@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Core\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-final class CoreController extends Controller
+final class CoreController
 {
     /**
      * Display a listing of the resource.

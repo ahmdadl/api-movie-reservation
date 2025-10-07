@@ -16,6 +16,7 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
 use Illuminate\Support\Str;
+
 use function Pest\Laravel\withoutExceptionHandling;
 
 pest()
@@ -29,7 +30,7 @@ pest()
 
         $this->freezeTime();
     })
-    ->in("Browser", "Feature", "Unit", "../Modules/*/tests/**/*Test.php")
+    ->in('Browser', 'Feature', 'Unit', '../Modules/*/tests/**/*Test.php')
     ->beforeAll(function () {
         withoutExceptionHandling();
     });
@@ -45,7 +46,7 @@ pest()
 |
 */
 
-expect()->extend("toBeOne", function () {
+expect()->extend('toBeOne', function () {
     return $this->toBe(1);
 });
 

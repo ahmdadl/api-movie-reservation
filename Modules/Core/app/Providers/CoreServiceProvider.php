@@ -28,7 +28,9 @@ final class CoreServiceProvider extends ServiceProvider
         $this->registerTranslations();
         // $this->registerConfig();
         // $this->registerViews();
-        $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+        $this->loadMigrationsFrom(
+            module_path($this->name, 'database/migrations'),
+        );
     }
 
     /**
@@ -52,7 +54,10 @@ final class CoreServiceProvider extends ServiceProvider
             $this->loadTranslationsFrom($langPath, $this->nameLower);
             $this->loadJsonTranslationsFrom($langPath);
         } else {
-            $this->loadTranslationsFrom(module_path($this->name, 'lang'), $this->nameLower);
+            $this->loadTranslationsFrom(
+                module_path($this->name, 'lang'),
+                $this->nameLower,
+            );
             $this->loadJsonTranslationsFrom(module_path($this->name, 'lang'));
         }
     }
@@ -65,11 +70,23 @@ final class CoreServiceProvider extends ServiceProvider
         $viewPath = resource_path('views/modules/'.$this->nameLower);
         $sourcePath = module_path($this->name, 'resources/views');
 
-        $this->publishes([$sourcePath => $viewPath], ['views', $this->nameLower.'-module-views']);
+        $this->publishes(
+            [$sourcePath => $viewPath],
+            ['views', $this->nameLower.'-module-views'],
+        );
 
-        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->nameLower);
+        $this->loadViewsFrom(
+            array_merge($this->getPublishableViewPaths(), [$sourcePath]),
+            $this->nameLower,
+        );
 
-        Blade::componentNamespace(config('modules.namespace').'\\'.$this->name.'\\View\\Components', $this->nameLower);
+        Blade::componentNamespace(
+            config('modules.namespace').
+                '\\'.
+                $this->name.
+                '\\View\\Components',
+            $this->nameLower,
+        );
     }
 
     /**
@@ -104,16 +121,32 @@ final class CoreServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): void
     {
-        $configPath = module_path($this->name, config('modules.paths.generator.config.path'));
+        $configPath = module_path(
+            $this->name,
+            config('modules.paths.generator.config.path'),
+        );
 
         if (is_dir($configPath)) {
-            $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($configPath));
+            $iterator = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($configPath),
+            );
 
             foreach ($iterator as $file) {
                 if ($file->isFile() && $file->getExtension() === 'php') {
-                    $config = str_replace($configPath.DIRECTORY_SEPARATOR, '', $file->getPathname());
-                    $config_key = str_replace([DIRECTORY_SEPARATOR, '.php'], ['.', ''], $config);
-                    $segments = explode('.', $this->nameLower.'.'.$config_key);
+                    $config = str_replace(
+                        $configPath.DIRECTORY_SEPARATOR,
+                        '',
+                        $file->getPathname(),
+                    );
+                    $config_key = str_replace(
+                        [DIRECTORY_SEPARATOR, '.php'],
+                        ['.', ''],
+                        $config,
+                    );
+                    $segments = explode(
+                        '.',
+                        $this->nameLower.'.'.$config_key,
+                    );
 
                     // Remove duplicated adjacent segments
                     $normalized = [];
@@ -123,9 +156,15 @@ final class CoreServiceProvider extends ServiceProvider
                         }
                     }
 
-                    $key = ($config === 'config.php') ? $this->nameLower : implode('.', $normalized);
+                    $key =
+                        $config === 'config.php'
+                            ? $this->nameLower
+                            : implode('.', $normalized);
 
-                    $this->publishes([$file->getPathname() => config_path($config)], 'config');
+                    $this->publishes(
+                        [$file->getPathname() => config_path($config)],
+                        'config',
+                    );
                     $this->merge_config_from($file->getPathname(), $key);
                 }
             }
