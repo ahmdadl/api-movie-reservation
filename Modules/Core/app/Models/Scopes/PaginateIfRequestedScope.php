@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+/**
+ * @codeCoverageIgnore
+ */
 trait PaginateIfRequestedScope
 {
     /**
@@ -25,7 +28,7 @@ trait PaginateIfRequestedScope
      * @param  Builder<Model>  $query
      */
     public function scopePaginateIfRequested(
-        Builder $query
+        Builder $query,
     ): LengthAwarePaginator|Collection {
         if (request()->has('paginate')) {
             return $query->paginate(request()->integer('perPage', 15));

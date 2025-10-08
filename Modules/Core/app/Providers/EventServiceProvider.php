@@ -6,6 +6,9 @@ namespace Modules\Core\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class EventServiceProvider extends ServiceProvider
 {
     /**

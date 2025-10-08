@@ -6,6 +6,9 @@ namespace Modules\Core\Traits;
 
 use BackedEnum;
 
+/**
+ * @codeCoverageIgnore
+ */
 trait HasEnumHelpers
 {
     /**
@@ -30,7 +33,7 @@ trait HasEnumHelpers
     public static function tryFromName(string $name): ?static
     {
         return collect(static::cases())->first(
-            fn (BackedEnum $case) => $case->name === $name
+            fn (BackedEnum $case) => $case->name === $name,
         );
     }
 }

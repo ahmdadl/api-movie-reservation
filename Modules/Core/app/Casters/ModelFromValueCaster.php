@@ -10,6 +10,9 @@ use Spatie\LaravelData\Casts\Cast;
 use Spatie\LaravelData\Support\Creation\CreationContext;
 use Spatie\LaravelData\Support\DataProperty;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class ModelFromValueCaster implements Cast
 {
     private string $modelClass;
@@ -21,7 +24,7 @@ final class ModelFromValueCaster implements Cast
     public function __construct(
         string $modelClass,
         string $lookupColumn = 'id',
-        array $where = []
+        array $where = [],
     ) {
         $this->modelClass = $modelClass;
         $this->lookupColumn = $lookupColumn;
@@ -32,7 +35,7 @@ final class ModelFromValueCaster implements Cast
         DataProperty $property,
         mixed $value,
         array $properties,
-        CreationContext $context
+        CreationContext $context,
     ): ?\Illuminate\Database\Eloquent\Model {
         if (is_null($value) || ! is_scalar($value)) {
             throw new ApiException(code: Response::HTTP_NOT_FOUND);

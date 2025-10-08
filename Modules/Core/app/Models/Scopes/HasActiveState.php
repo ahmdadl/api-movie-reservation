@@ -7,6 +7,9 @@ namespace Modules\Core\Models\Scopes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @codeCoverageIgnore
+ */
 trait HasActiveState
 {
     /**

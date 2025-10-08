@@ -7,6 +7,9 @@ namespace Modules\Core\Providers;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class RouteServiceProvider extends ServiceProvider
 {
     protected string $name = 'Core';
@@ -37,7 +40,9 @@ final class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes(): void
     {
-        Route::middleware('web')->group(module_path($this->name, '/routes/web.php'));
+        Route::middleware('web')->group(
+            module_path($this->name, '/routes/web.php'),
+        );
     }
 
     /**
@@ -47,6 +52,9 @@ final class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes(): void
     {
-        Route::middleware('api')->prefix('api')->name('api.')->group(module_path($this->name, '/routes/api.php'));
+        Route::middleware('api')
+            ->prefix('api')
+            ->name('api.')
+            ->group(module_path($this->name, '/routes/api.php'));
     }
 }

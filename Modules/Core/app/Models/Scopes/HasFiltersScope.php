@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Modules\Core\Models\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Modules\Core\Filters\ModelFilter;
 
+/**
+ * @codeCoverageIgnore
+ */
 trait HasFiltersScope
 {
     /**

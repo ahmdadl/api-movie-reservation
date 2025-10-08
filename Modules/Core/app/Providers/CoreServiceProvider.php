@@ -4,12 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\Core\Providers;
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Sanctum\Sanctum;
+use Modules\Core\Console\ModuleDtoMakeCommand;
+use Modules\Core\Mixins\BlueprintMixins;
+use Modules\Core\Models\PersonalAccessToken;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class CoreServiceProvider extends ServiceProvider
 {
     use PathNamespace;
@@ -31,6 +39,8 @@ final class CoreServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(
             module_path($this->name, 'database/migrations'),
         );
+
+        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
     }
 
     /**
@@ -41,6 +51,8 @@ final class CoreServiceProvider extends ServiceProvider
         // $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(Filament\AdminPanelProvider::class);
+
+        Blueprint::mixin(new BlueprintMixins());
     }
 
     /**
@@ -102,7 +114,7 @@ final class CoreServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([ModuleDtoMakeCommand::class]);
     }
 
     /**

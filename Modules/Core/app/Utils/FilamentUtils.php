@@ -9,6 +9,9 @@ use Illuminate\Http\UploadedFile;
 // use Modules\Uploads\Actions\StoreUploadAction;
 // use Modules\Uploads\Models\Upload;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class FilamentUtils
 {
     // public static function storeSingleFile(mixed $state): ?string

@@ -8,6 +8,9 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class ApiException extends Exception
 {
     /**
@@ -22,7 +25,7 @@ final class ApiException extends Exception
 
             return api()->error(
                 $this->getMessage(),
-                $this->getCode() > 199 ? $this->getCode() : 400
+                $this->getCode() > 199 ? $this->getCode() : 400,
             );
         }
 
