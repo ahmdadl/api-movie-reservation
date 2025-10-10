@@ -18,11 +18,11 @@
         "laravel/sanctum": "^4.2",
         "nunomaduro/essentials": "^1.0.1",
         "nwidart/laravel-modules": "^12.0.4",
-        "spatie/laravel-data": "^4.17"
+        "spatie/laravel-data": "^4.17.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.6",
-        "driftingly/rector-laravel": "^2.0.7",
+        "driftingly/rector-laravel": "^2.0",
         "fakerphp/faker": "^1.24.1",
         "laradumps/laradumps": "^4.5.2",
         "larastan/larastan": "^3.7.2",
