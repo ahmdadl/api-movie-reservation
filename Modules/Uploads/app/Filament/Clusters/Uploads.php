@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Uploads\Filament\Clusters;
 
 use Filament\Clusters\Cluster;
 use Nwidart\Modules\Facades\Module;
 
-class Uploads extends Cluster
+final class Uploads extends Cluster
 {
     public static function getModuleName(): string
     {
@@ -14,7 +16,7 @@ class Uploads extends Cluster
 
     public static function getModule(): \Nwidart\Modules\Module
     {
-        return Module::findOrFail(static::getModuleName());
+        return Module::findOrFail(self::getModuleName());
     }
 
     public static function getNavigationLabel(): string

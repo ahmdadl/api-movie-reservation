@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Uploads\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -10,7 +12,7 @@ use Modules\Uploads\Actions\StoreUploadAction;
 use Modules\Uploads\Models\Upload;
 use Modules\Uploads\Transformers\UploadResource;
 
-class UploadController extends Controller
+final class UploadController extends Controller
 {
     /**
      * store uploaded file

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Uploads\Actions;
 
+use Exception;
 use Illuminate\Support\Facades\Storage;
 use Modules\Uploads\Models\Upload;
 use Throwable;
 
-class ShowUploadAction
+final class ShowUploadAction
 {
     /**
      * Execute the action to retrieve the uploaded file content.
@@ -47,7 +50,7 @@ class ShowUploadAction
             $upload->type ?? Storage::disk('public')->mimeType($filePath);
 
         if (! $mimeType) {
-            throw new \Exception('Unable to determine MIME type for the file.');
+            throw new Exception('Unable to determine MIME type for the file.');
         }
 
         return $mimeType;

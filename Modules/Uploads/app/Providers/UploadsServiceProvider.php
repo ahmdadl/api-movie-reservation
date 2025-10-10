@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Uploads\Providers;
 
 use Illuminate\Support\Facades\Blade;
@@ -8,7 +10,7 @@ use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-class UploadsServiceProvider extends ServiceProvider
+final class UploadsServiceProvider extends ServiceProvider
 {
     use PathNamespace;
 
@@ -41,25 +43,6 @@ class UploadsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register commands in the format of Command::class
-     */
-    protected function registerCommands(): void
-    {
-        // $this->commands([]);
-    }
-
-    /**
-     * Register command Schedules.
-     */
-    protected function registerCommandSchedules(): void
-    {
-        // $this->app->booted(function () {
-        //     $schedule = $this->app->make(Schedule::class);
-        //     $schedule->command('inspire')->hourly();
-        // });
-    }
-
-    /**
      * Register translations.
      */
     public function registerTranslations(): void
@@ -76,6 +59,60 @@ class UploadsServiceProvider extends ServiceProvider
             );
             $this->loadJsonTranslationsFrom(module_path($this->name, 'lang'));
         }
+    }
+
+    /**
+     * Register views.
+     */
+    public function registerViews(): void
+    {
+        $viewPath = resource_path('views/modules/'.$this->nameLower);
+        $sourcePath = module_path($this->name, 'resources/views');
+
+        $this->publishes(
+            [$sourcePath => $viewPath],
+            ['views', $this->nameLower.'-module-views']
+        );
+
+        $this->loadViewsFrom(
+            array_merge($this->getPublishableViewPaths(), [$sourcePath]),
+            $this->nameLower
+        );
+
+        $componentNamespace = $this->module_namespace(
+            $this->name,
+            $this->app_path(
+                config('modules.paths.generator.component-class.path')
+            )
+        );
+        Blade::componentNamespace($componentNamespace, $this->nameLower);
+    }
+
+    /**
+     * Get the services provided by the provider.
+     */
+    public function provides(): array
+    {
+        return [];
+    }
+
+    /**
+     * Register commands in the format of Command::class
+     */
+    protected function registerCommands(): void
+    {
+        // $this->commands([]);
+    }
+
+    /**
+     * Register command Schedules.
+     */
+    protected function registerCommandSchedules(): void
+    {
+        // $this->app->booted(function () {
+        //     $schedule = $this->app->make(Schedule::class);
+        //     $schedule->command('inspire')->hourly();
+        // });
     }
 
     /**
@@ -119,41 +156,6 @@ class UploadsServiceProvider extends ServiceProvider
                 }
             }
         }
-    }
-
-    /**
-     * Register views.
-     */
-    public function registerViews(): void
-    {
-        $viewPath = resource_path('views/modules/'.$this->nameLower);
-        $sourcePath = module_path($this->name, 'resources/views');
-
-        $this->publishes(
-            [$sourcePath => $viewPath],
-            ['views', $this->nameLower.'-module-views']
-        );
-
-        $this->loadViewsFrom(
-            array_merge($this->getPublishableViewPaths(), [$sourcePath]),
-            $this->nameLower
-        );
-
-        $componentNamespace = $this->module_namespace(
-            $this->name,
-            $this->app_path(
-                config('modules.paths.generator.component-class.path')
-            )
-        );
-        Blade::componentNamespace($componentNamespace, $this->nameLower);
-    }
-
-    /**
-     * Get the services provided by the provider.
-     */
-    public function provides(): array
-    {
-        return [];
     }
 
     private function getPublishableViewPaths(): array

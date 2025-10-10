@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Uploads\Actions;
 
 use Illuminate\Http\UploadedFile;
 use Modules\Core\Traits\HasActionHelpers;
 use Modules\Uploads\Models\Upload;
 
-class StoreUploadAction
+final class StoreUploadAction
 {
     use HasActionHelpers;
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Uploads\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
@@ -8,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @implements CastsAttributes<string, string>
  */
-class UploadablePathCast implements CastsAttributes
+final class UploadablePathCast implements CastsAttributes
 {
     /**
      * Cast the given value.

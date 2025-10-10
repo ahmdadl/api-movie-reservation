@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Uploads\Filament;
 
 use Coolsam\Modules\Concerns\ModuleFilamentPlugin;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class UploadsPlugin implements Plugin
+final class UploadsPlugin implements Plugin
 {
     use ModuleFilamentPlugin;
 

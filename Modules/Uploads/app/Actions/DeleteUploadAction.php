@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Uploads\Actions;
 
 use Illuminate\Support\Facades\Storage;
 use Modules\Uploads\Models\Upload;
 
-class DeleteUploadAction
+final class DeleteUploadAction
 {
     public function handle(Upload $upload): ?bool
     {

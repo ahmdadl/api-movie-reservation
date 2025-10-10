@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Uploads\Models;
 
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
@@ -10,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Uploads\Database\Factories\UploadFactory;
 
 #[UseFactory(UploadFactory::class)]
-class Upload extends Model
+final class Upload extends Model
 {
     /** @use HasFactory<UploadFactory> */
     use HasFactory, HasUlids;

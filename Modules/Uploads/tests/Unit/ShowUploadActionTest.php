@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Storage;
 use Modules\Uploads\Actions\ShowUploadAction;
 use Modules\Uploads\Models\Upload;
@@ -40,7 +42,7 @@ it('throws FileNotFoundException when file does not exist', function () {
 
     // Act & Assert: Expect the FileNotFoundException to be thrown
     expect(fn () => (new ShowUploadAction)->handle($upload))->toThrow(
-        \Illuminate\Contracts\Filesystem\FileNotFoundException::class,
+        Illuminate\Contracts\Filesystem\FileNotFoundException::class,
         __('core::t.file_not_found')
     );
 });

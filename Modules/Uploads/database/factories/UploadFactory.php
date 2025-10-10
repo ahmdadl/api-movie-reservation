@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Uploads\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UploadFactory extends Factory
+final class UploadFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
