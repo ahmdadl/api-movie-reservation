@@ -3,7 +3,7 @@
 namespace $NAMESPACE$;
 
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Translatable\HasTranslations;
@@ -13,7 +13,7 @@ use Spatie\Translatable\HasTranslations;
 class $CLASS$ extends Model
 {
     /** @use HasFactory<$NAME$Factory> */
-    use HasFactory, HasUlids;
+    use HasFactory, HasUuids;
 
     /**
      * cast fields
