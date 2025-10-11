@@ -7,8 +7,9 @@ namespace Modules\Users\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Modules\Users\Models\User;
-use Schema;
 
 final class UserSeeder extends Seeder
 {
@@ -47,13 +48,15 @@ final class UserSeeder extends Seeder
         // add tokens
         $userId = User::user()->first()->id;
 
+        $uuid = Str::uuid();
+
         DB::unprepared(
             "
-        INSERT INTO personal_access_tokens (tokenable_type, tokenable_id, name, token, abilities) VALUES
-('Modules\Users\Models\User',	'$userId',	'seed',	'a93d348104b4cea8867278a539746185ea41c6566a9a22262efb02f864f4bb2c',	'[*]')",
+        INSERT INTO personal_access_tokens (id, tokenable_type, tokenable_id, name, token, abilities) VALUES
+('$uuid',	'Modules\Users\Models\User',	'$userId',	'seed',	'a93d348104b4cea8867278a539746185ea41c6566a9a22262efb02f864f4bb2c',	'[*]')",
         );
 
-        if (! Schema::hasTable('model_has_roles')) {
+        if (!Schema::hasTable('model_has_roles')) {
             return;
         }
 

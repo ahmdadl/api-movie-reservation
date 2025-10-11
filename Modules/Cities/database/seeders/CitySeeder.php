@@ -14,108 +14,110 @@ class CitySeeder extends Seeder
     {
         $usCities = [
             [
-                'city' => 'New York City',
+                'title' => 'New York City',
                 'state' => 'NY',
             ],
             [
-                'city' => 'Los Angeles',
+                'title' => 'Los Angeles',
                 'state' => 'CA',
             ],
             [
-                'city' => 'Chicago',
+                'title' => 'Chicago',
                 'state' => 'IL',
             ],
             [
-                'city' => 'Houston',
+                'title' => 'Houston',
                 'state' => 'TX',
             ],
             [
-                'city' => 'Phoenix',
+                'title' => 'Phoenix',
                 'state' => 'AZ',
             ],
             [
-                'city' => 'Philadelphia',
+                'title' => 'Philadelphia',
                 'state' => 'PA',
             ],
             [
-                'city' => 'San Antonio',
+                'title' => 'San Antonio',
                 'state' => 'TX',
             ],
             [
-                'city' => 'San Diego',
+                'title' => 'San Diego',
                 'state' => 'CA',
             ],
             [
-                'city' => 'Dallas',
+                'title' => 'Dallas',
                 'state' => 'TX',
             ],
             [
-                'city' => 'Jacksonville',
+                'title' => 'Jacksonville',
                 'state' => 'FL',
             ],
             [
-                'city' => 'Fort Worth',
+                'title' => 'Fort Worth',
                 'state' => 'TX',
             ],
             [
-                'city' => 'San Jose',
+                'title' => 'San Jose',
                 'state' => 'CA',
             ],
             [
-                'city' => 'Austin',
+                'title' => 'Austin',
                 'state' => 'TX',
             ],
             [
-                'city' => 'Charlotte',
+                'title' => 'Charlotte',
                 'state' => 'NC',
             ],
             [
-                'city' => 'Columbus',
+                'title' => 'Columbus',
                 'state' => 'OH',
             ],
             [
-                'city' => 'Indianapolis',
+                'title' => 'Indianapolis',
                 'state' => 'IN',
             ],
             [
-                'city' => 'San Francisco',
+                'title' => 'San Francisco',
                 'state' => 'CA',
             ],
             [
-                'city' => 'Seattle',
+                'title' => 'Seattle',
                 'state' => 'WA',
             ],
             [
-                'city' => 'Denver',
+                'title' => 'Denver',
                 'state' => 'CO',
             ],
             [
-                'city' => 'Oklahoma City',
+                'title' => 'Oklahoma City',
                 'state' => 'OK',
             ],
             [
-                'city' => 'Nashville',
+                'title' => 'Nashville',
                 'state' => 'TN',
             ],
             [
-                'city' => 'Washington',
+                'title' => 'Washington',
                 'state' => 'DC',
             ],
             [
-                'city' => 'Las Vegas',
+                'title' => 'Las Vegas',
                 'state' => 'NV',
             ],
             [
-                'city' => 'Boston',
+                'title' => 'Boston',
                 'state' => 'MA',
             ],
             [
-                'city' => 'Portland',
+                'title' => 'Portland',
                 'state' => 'OR',
             ],
         ];
 
         City::query()->delete();
-        City::query()->insert($usCities);
+        foreach ($usCities as $city) {
+            City::query()->create($city);
+        }
     }
 }
