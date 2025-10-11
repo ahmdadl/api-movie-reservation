@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Modules\Cities\Database\Seeders\CitySeeder;
 use Modules\Users\Database\Seeders\UserSeeder;
 
 final class DatabaseSeeder extends Seeder
@@ -16,5 +17,6 @@ final class DatabaseSeeder extends Seeder
     public function run(): void
     {
         new UserSeeder()->run();
+        new CitySeeder()->run();
     }
 }

@@ -1,5 +1,6 @@
 {
     "Core": true,
     "Uploads": true,
-    "Users": true
+    "Users": true,
+    "Cities": true
 }
