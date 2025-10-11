@@ -18,7 +18,7 @@ class CheckUserRole
 
         $user = user();
 
-        if (!$user->role->value === $role) {
+        if ($user->role->value !== $role) {
             return api()->forbidden();
         }
 
