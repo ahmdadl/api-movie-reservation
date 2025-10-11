@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
+use Modules\Core\Models\PasswordResetToken;
 use Modules\Users\Emails\UserForgetPasswordMail;
 use Modules\Users\Emails\UserRegisteredMail;
+use Modules\Users\Emails\UserResetPasswordMail;
 use Modules\Users\Events\UserLoginEvent;
 use Modules\Users\Models\User;
 
@@ -73,7 +75,7 @@ it('can register as user', function () {
 
     assertDatabaseHas('users', ['id' => $guest->id, 'deleted_at' => null]);
 
-    Mail::assertSent(UserRegisteredMail::class);
+    Mail::assertQueued(UserRegisteredMail::class);
 });
 
 it('can forgot password', function () {
@@ -92,4 +94,28 @@ it('can forgot password', function () {
     ])->assertOk();
 
     Mail::assertQueued(UserForgetPasswordMail::class);
+});
+
+it('can reset password if token is valid', function () {
+    $user = User::factory()->createOne();
+    $token = random_int(1000, 9999);
+
+    PasswordResetToken::createToken($user->email, $token);
+
+    Mail::fake();
+
+    Mail::assertNothingSent();
+
+    asTestGuest();
+
+    postJson(route('api.auth.reset-password'), [
+        'email' => $user->email,
+        'token' => $token,
+        'password' => '12312313',
+        'passwordConfirmation' => '12312313',
+    ])->assertOk();
+
+    Mail::assertQueued(UserResetPasswordMail::class);
+
+    assertDatabaseMissing('password_reset_tokens', ['email' => $user->email]);
 });

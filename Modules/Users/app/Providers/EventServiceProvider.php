@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Users\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Modules\Users\Events\UserResetPasswordEvent;
 
 final class EventServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,10 @@ final class EventServiceProvider extends ServiceProvider
     protected $listen = [
         \Modules\Users\Events\UserLoginEvent::class => [
             \Modules\Users\Listeners\MergeGuestToLoggedUserListener::class,
+        ],
+        UserResetPasswordEvent::class => [
+            \Modules\Users\Listeners\RemoveUserResetPasswordTokenListener::class,
+            \Modules\Users\Listeners\SendUserResetPasswordMailListener::class,
         ],
     ];
 

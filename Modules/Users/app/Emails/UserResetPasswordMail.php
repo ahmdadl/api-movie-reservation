@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Modules\Users\Models\User;
 
-class UserRegisteredMail extends Mailable implements ShouldQueue
+class UserResetPasswordMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +19,7 @@ class UserRegisteredMail extends Mailable implements ShouldQueue
      */
     public function __construct(public readonly string $userId)
     {
-        $this->user = User::findOrFail($this->userId);
+        $this->user = User::query()->findOrFail($this->userId);
     }
 
     /**
@@ -27,12 +27,14 @@ class UserRegisteredMail extends Mailable implements ShouldQueue
      */
     public function build(): self
     {
-        return $this->subject('User Registered Successfully')->html(
-            "<h1>User Registered Successfully</h1>
-            <p>Dear {$this->user->first_name},</p>
-            <p>Thank you for registering on our platform.</p>
-            <p>Best regards,</p>
-            <p>Our Team</p>",
+        return $this->subject('Your password has been reset')->html(
+            <<<HTML
+            <h1>Your password has been reset</h1>
+            <p>Dear {$this->user->first_name} {$this->user->last_name},</p>
+            <p>Your password has been reset successfully.</p>
+            <p>Thank you for using our service.</p>
+            <p>Best regards</p>
+            HTML,
         );
     }
 }

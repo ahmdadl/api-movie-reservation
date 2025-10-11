@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Modules\Core\Models\PasswordResetToken;
 use Modules\Users\Emails\UserForgetPasswordMail;
 use Modules\Users\Events\PasswordResetLinkSentEvent;
 use Modules\Users\Models\User;
@@ -22,16 +23,11 @@ final class ForgotPasswordAction
             ->where('email', $email)
             ->firstOrFail();
 
-        $token = Str::random(6);
+        $token = PasswordResetToken::createToken($user->email);
 
-        DB::table('password_reset_tokens')->updateOrInsert(
-            ['email' => $email],
-            [
-                'token' => bcrypt($token),
-                'created_at' => now(),
-            ],
+        sendMail(
+            $user->email,
+            new UserForgetPasswordMail($user->id, $token->token),
         );
-
-        sendMail($user->email, new UserForgetPasswordMail($user->id, $token));
     }
 }

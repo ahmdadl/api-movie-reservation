@@ -91,13 +91,7 @@ final class AuthController
         ResetPasswordRequest $request,
         ResetPasswordAction $action,
     ): JsonResponse {
-        $success = $action->handle($request->validated());
-
-        if (!$success) {
-            return api()->validationError([
-                'token' => 'Invalid or expired token',
-            ]);
-        }
+        $action->handle($request->validated());
 
         return api()->success(message: 'Password has been reset successfully');
     }
