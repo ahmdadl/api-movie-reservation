@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Users\ValueObjects\UserTotals;
 use Modules\Users\Enums\UserRole;
 
 return new class extends Migration {
@@ -16,11 +19,17 @@ return new class extends Migration {
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
+            $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->string('role', 20)->default(UserRole::USER->value);
+            $table
+                ->json('totals')
+                ->default(json_encode(UserTotals::make()->toArray()));
+            $table->activeState();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (

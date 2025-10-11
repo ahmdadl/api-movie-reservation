@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Users\Enums;
 
 use Modules\Core\Traits\HasActionHelpers;
