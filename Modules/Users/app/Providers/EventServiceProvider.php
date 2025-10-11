@@ -13,7 +13,11 @@ final class EventServiceProvider extends ServiceProvider
      *
      * @var array<string, array<int, string>>
      */
-    protected $listen = [];
+    protected $listen = [
+        \Modules\Users\Events\UserLoginEvent::class => [
+            \Modules\Users\Listeners\MergeGuestToLoggedUserListener::class,
+        ],
+    ];
 
     /**
      * Indicates if events should be discovered.

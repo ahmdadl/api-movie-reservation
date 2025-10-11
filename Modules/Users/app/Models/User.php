@@ -8,30 +8,29 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Modules\Users\ValueObjects\UserTotals;
-use Modules\Users\Database\Factories\UserFactory;
-use Modules\Users\Enums\UserRole;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Core\Models\Scopes\HasActiveState;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Users\Database\Factories\UserFactory;
+use Modules\Users\Enums\UserRole;
 use Modules\Users\Transformers\UserTransformer;
+use Modules\Users\ValueObjects\UserTotals;
+use Spatie\Permission\Traits\HasRoles;
 
 #[UseFactory(UserFactory::class)]
 #[UseResource(UserTransformer::class)]
 final class User extends Authenticatable
 {
-    use HasFactory,
-        HasUuids,
-        SoftDeletes,
+    use HasActiveState,
+        HasApiTokens,
+        HasFactory,
         HasRoles,
-        HasActiveState,
-        HasApiTokens;
+        HasUuids,
+        SoftDeletes;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -51,6 +50,14 @@ final class User extends Authenticatable
             'role' => UserRole::class,
             'totals' => UserTotals::class,
         ];
+    }
+
+    /**
+     * who can access admin panel
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->role === UserRole::ADMIN;
     }
 
     /**
@@ -78,13 +85,5 @@ final class User extends Authenticatable
     protected function guest(Builder $query): void
     {
         $query->where('role', UserRole::GUEST);
-    }
-
-    /**
-     * who can access admin panel
-     */
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return $this->role === UserRole::ADMIN;
     }
 }

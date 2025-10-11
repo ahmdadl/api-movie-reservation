@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Users\Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -8,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Users\Models\User;
 use Schema;
 
-class UserSeeder extends Seeder
+final class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -51,7 +53,7 @@ class UserSeeder extends Seeder
 ('Modules\Users\Models\User',	'$userId',	'seed',	'a93d348104b4cea8867278a539746185ea41c6566a9a22262efb02f864f4bb2c',	'[*]')",
         );
 
-        if (!Schema::hasTable('model_has_roles')) {
+        if (! Schema::hasTable('model_has_roles')) {
             return;
         }
 

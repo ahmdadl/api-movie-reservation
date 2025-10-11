@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Core\Http\Middleware;
 
 use Closure;
@@ -20,7 +22,7 @@ final class AuthenticatePublicRoutes
     {
         $headers = $request->headers;
 
-        if (!$headers->has($this->publicTokenHeader)) {
+        if (! $headers->has($this->publicTokenHeader)) {
             return api()->forbidden('Public token is required');
         }
 

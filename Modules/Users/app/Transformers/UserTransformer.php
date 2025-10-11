@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Users\Transformers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserTransformer extends JsonResource
+final class UserTransformer extends JsonResource
 {
     /**
      * Transform the resource into an array.

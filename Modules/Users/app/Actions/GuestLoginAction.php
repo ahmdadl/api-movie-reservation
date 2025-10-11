@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Users\Actions;
 
 use Modules\Users\Models\User;
 
-class GuestLoginAction
+final class GuestLoginAction
 {
     /**
      * @return array{User, string}

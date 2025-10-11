@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 use Modules\Users\Http\Controllers\AuthController;
-use Modules\Users\Http\Controllers\UsersController;
 
 Route::prefix('auth')
     ->name('auth.')
@@ -13,4 +12,8 @@ Route::prefix('auth')
         Route::post('guests/login', 'loginGuest')
             ->name('login-guest')
             ->middleware(['auth-public', 'throttle:guest']);
+
+        Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
+            Route::post('users/login', 'loginUser')->name('login-user');
+        });
     });

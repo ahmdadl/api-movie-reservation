@@ -16,6 +16,9 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
 use Illuminate\Support\Str;
+use Modules\Users\Models\User;
+
+use function Pest\Laravel\actingAs;
 
 $moduleTestPaths = collect(glob(__DIR__ . '/../Modules/*/tests'))
     ->map(fn($path) => realpath($path))
@@ -63,7 +66,38 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
-{
-    // ..
+/**
+ * login as a customer
+ */
+function asTestUser(
+    ?User $user = null,
+): \Illuminate\Contracts\Auth\Authenticatable&User {
+    /** @var Illuminate\Contracts\Auth\Authenticatable */
+    $user = $user ?? User::factory()->user()->create();
+
+    actingAs($user);
+
+    return $user;
+}
+
+function asTestAdmin(
+    ?User $user = null,
+): \Illuminate\Contracts\Auth\Authenticatable&User {
+    /** @var \Illuminate\Contracts\Auth\Authenticatable */
+    $user = $user ?? User::factory()->admin()->createOne();
+
+    actingAs($user);
+
+    return $user;
+}
+
+function asTestGuest(
+    ?User $user = null,
+): \Illuminate\Contracts\Auth\Authenticatable&User {
+    /** @var \Illuminate\Contracts\Auth\Authenticatable */
+    $user = $user ?? User::factory()->guest()->createOne();
+
+    actingAs($user);
+
+    return $user;
 }

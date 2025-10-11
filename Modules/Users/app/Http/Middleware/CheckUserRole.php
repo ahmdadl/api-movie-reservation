@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Users\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckUserRole
+final class CheckUserRole
 {
     /**
      * Handle an incoming request.
      */
     public function handle(Request $request, Closure $next, string $role)
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return api()->unauthorized();
         }
 

@@ -7,8 +7,8 @@ namespace Modules\Users\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Modules\Users\ValueObjects\UserTotals;
 use Modules\Users\Enums\UserRole;
+use Modules\Users\ValueObjects\UserTotals;
 
 final class UserFactory extends Factory
 {
@@ -49,7 +49,7 @@ final class UserFactory extends Factory
     public function unverified(): self
     {
         return $this->state(
-            fn(array $attributes): array => [
+            fn (array $attributes): array => [
                 'email_verified_at' => null,
             ],
         );
@@ -58,7 +58,7 @@ final class UserFactory extends Factory
     public function admin(): self
     {
         return $this->state(
-            fn(array $attributes): array => [
+            fn (array $attributes): array => [
                 'role' => UserRole::ADMIN->value,
             ],
         );
@@ -67,7 +67,7 @@ final class UserFactory extends Factory
     public function guest(): self
     {
         return $this->state(
-            fn(array $attributes): array => [
+            fn (array $attributes): array => [
                 'role' => UserRole::GUEST->value,
             ],
         );

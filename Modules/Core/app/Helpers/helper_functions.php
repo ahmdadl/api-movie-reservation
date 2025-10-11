@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 use Modules\Users\Models\User;
 
-if (!function_exists('api')) {
+if (! function_exists('api')) {
     /**
      * api response
      *
@@ -20,7 +20,7 @@ if (!function_exists('api')) {
     }
 }
 
-if (!function_exists('user')) {
+if (! function_exists('user')) {
     /**
      * get current user
      */
@@ -43,7 +43,7 @@ if (!function_exists('user')) {
 //     }
 // }
 
-if (!function_exists('multiLangInput')) {
+if (! function_exists('multiLangInput')) {
     function multiLangInput(
         Filament\Forms\Components\TextInput|Filament\Forms\Components\Textarea|Filament\Forms\Components\RichEditor $input,
     ): array {
@@ -58,18 +58,18 @@ if (!function_exists('multiLangInput')) {
 
         return [
             $input
-                ->make($name . '.en')
+                ->make($name.'.en')
                 ->label($enLabel)
                 ->required($input->isRequired()),
             $clone
-                ->make($name . '.ar')
+                ->make($name.'.ar')
                 ->label($arLabel)
                 ->required($input->isRequired()),
         ];
     }
 }
 
-if (!function_exists('metaTabInputs')) {
+if (! function_exists('metaTabInputs')) {
     function metaTabInputs(): Filament\Forms\Components\Tabs\Tab
     {
         return Filament\Forms\Components\Tabs\Tab::make('meta')
@@ -96,7 +96,7 @@ if (!function_exists('metaTabInputs')) {
     }
 }
 
-if (!function_exists('activeToggler')) {
+if (! function_exists('activeToggler')) {
     function activeToggler(): mixed
     {
         return Filament\Tables\Filters\Filter::make('is_active')
@@ -122,35 +122,35 @@ if (!function_exists('activeToggler')) {
             ): Illuminate\Database\Eloquent\Builder {
                 return $query->when(
                     $activeState = $data['is_active'],
-                    fn($q) => $q
+                    fn ($q) => $q
                         ->when(
                             $activeState === 'active',
-                            fn($q) => $q->where('is_active', true),
+                            fn ($q) => $q->where('is_active', true),
                         )
                         ->when(
                             $activeState === 'inactive',
-                            fn($q) => $q->where('is_active', false),
+                            fn ($q) => $q->where('is_active', false),
                         ),
                 );
             });
     }
 }
 
-if (!function_exists('uploads_url')) {
+if (! function_exists('uploads_url')) {
     function uploads_url(?string $path = null): string
     {
         /** @var string $uploadsUrl */
         $uploadsUrl = config('app.uploads_url', '');
 
-        if (!$path) {
+        if (! $path) {
             return $uploadsUrl;
         }
 
-        return $uploadsUrl . '/' . $path;
+        return $uploadsUrl.'/'.$path;
     }
 }
 
-if (!function_exists('sendMail')) {
+if (! function_exists('sendMail')) {
     function sendMail(string $to, Illuminate\Mail\Mailable $mail): void
     {
         try {
@@ -162,7 +162,7 @@ if (!function_exists('sendMail')) {
     }
 }
 
-if (!function_exists('enumOptions')) {
+if (! function_exists('enumOptions')) {
     /**
      * get localized enum options
      *
@@ -181,7 +181,7 @@ if (!function_exists('enumOptions')) {
     }
 }
 
-if (!function_exists('testMail')) {
+if (! function_exists('testMail')) {
     function testMail(Illuminate\Mail\Mailable $mailable): mixed
     {
         // @phpstan-ignore-next-line
@@ -189,13 +189,13 @@ if (!function_exists('testMail')) {
     }
 }
 
-if (!function_exists('sortOrderInput')) {
+if (! function_exists('sortOrderInput')) {
     function sortOrderInput(string $model): Filament\Forms\Components\TextInput
     {
         return Filament\Forms\Components\TextInput::make('sort_order')
             ->translateLabel()
             ->numeric()
-            ->default(fn() => $model::max('sort_order') + 1)
+            ->default(fn () => $model::max('sort_order') + 1)
             ->suffixAction(
                 Filament\Forms\Components\Actions\Action::make(
                     'latestSortOrder',
@@ -211,7 +211,7 @@ if (!function_exists('sortOrderInput')) {
     }
 }
 
-if (!function_exists('asUser')) {
+if (! function_exists('asUser')) {
     function asUser(User $user, callable $callback, ?string $guard = null): void
     {
         $currentUser = auth($guard)->user();
@@ -224,7 +224,7 @@ if (!function_exists('asUser')) {
     }
 }
 
-if (!function_exists('systemUser')) {
+if (! function_exists('systemUser')) {
     function systemUser(): User
     {
         return User::query()
