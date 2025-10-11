@@ -17,11 +17,15 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Sleep;
 use Illuminate\Support\Str;
 
-use function Pest\Laravel\withoutExceptionHandling;
+$moduleTestPaths = collect(glob(__DIR__ . '/../Modules/*/tests'))
+    ->map(fn($path) => realpath($path))
+    ->filter()
+    ->all();
 
 pest()
     ->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->in('Browser', 'Feature', 'Unit', ...$moduleTestPaths)
     ->beforeEach(function () {
         Str::createRandomStringsNormally();
         Str::createUuidsNormally();
@@ -29,10 +33,8 @@ pest()
         Sleep::fake();
 
         $this->freezeTime();
-    })
-    ->in('Browser', 'Feature', 'Unit', '../Modules/*/tests/**/*Test.php')
-    ->beforeAll(function () {
-        withoutExceptionHandling();
+
+        $this->withoutExceptionHandling();
     });
 
 /*

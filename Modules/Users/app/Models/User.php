@@ -7,6 +7,7 @@ namespace Modules\Users\Models;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,8 +20,10 @@ use Laravel\Sanctum\HasApiTokens;
 use Modules\Core\Models\Scopes\HasActiveState;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Users\Transformers\UserTransformer;
 
 #[UseFactory(UserFactory::class)]
+#[UseResource(UserTransformer::class)]
 final class User extends Authenticatable
 {
     use HasFactory,
