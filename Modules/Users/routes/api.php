@@ -12,5 +12,5 @@ Route::prefix('auth')
     ->group(function () {
         Route::post('guests/login', 'loginGuest')
             ->name('login-guest')
-            ->middleware(['throttle:guest']);
+            ->middleware(['auth-public', 'throttle:guest']);
     });
