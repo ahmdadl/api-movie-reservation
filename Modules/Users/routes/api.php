@@ -10,5 +10,7 @@ Route::prefix('auth')
     ->name('auth.')
     ->controller(AuthController::class)
     ->group(function () {
-        Route::post('guests/login', 'loginGuest')->name('login-guest');
+        Route::post('guests/login', 'loginGuest')
+            ->name('login-guest')
+            ->middleware(['throttle:guest']);
     });
