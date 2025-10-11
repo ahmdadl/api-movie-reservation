@@ -18,9 +18,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Core\Models\Scopes\HasActiveState;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 #[UseFactory(UserFactory::class)]
-final class User extends Model
+final class User extends Authenticatable
 {
     use HasFactory,
         HasUuids,
