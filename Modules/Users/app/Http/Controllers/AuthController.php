@@ -79,7 +79,9 @@ final class AuthController
     ): JsonResponse {
         $action->handle($request->input('email'));
 
-        return api()->success(null, 'Password reset link sent to your email');
+        return api()->success(
+            message: 'Password reset link sent to your email',
+        );
     }
 
     /**
@@ -92,9 +94,11 @@ final class AuthController
         $success = $action->handle($request->validated());
 
         if (!$success) {
-            return api()->error('Invalid or expired token', 422, []);
+            return api()->validationError([
+                'token' => 'Invalid or expired token',
+            ]);
         }
 
-        return api()->success(null, 'Password has been reset successfully');
+        return api()->success(message: 'Password has been reset successfully');
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
+use Modules\Users\Emails\UserForgetPasswordMail;
 use Modules\Users\Emails\UserRegisteredMail;
 use Modules\Users\Events\UserLoginEvent;
 use Modules\Users\Models\User;
@@ -73,4 +74,22 @@ it('can register as user', function () {
     assertDatabaseHas('users', ['id' => $guest->id, 'deleted_at' => null]);
 
     Mail::assertSent(UserRegisteredMail::class);
+});
+
+it('can forgot password', function () {
+    $user = User::factory()->createOne([
+        'password' => ($password = '12312313'),
+    ]);
+
+    Mail::fake();
+
+    Mail::assertNothingSent();
+
+    asTestGuest();
+
+    postJson(route('api.auth.forgot-password'), [
+        'email' => $user->email,
+    ])->assertOk();
+
+    Mail::assertQueued(UserForgetPasswordMail::class);
 });
