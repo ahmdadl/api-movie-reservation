@@ -39,7 +39,9 @@ class PasswordResetToken extends Model
      */
     public static function verifyToken(string $email, string|int $token): bool
     {
-        return hash('sha256', $token . $email) ===
-            self::query()->email($email)->value('token');
+        return hash_equals(
+            hash('sha256', $token . $email),
+            self::query()->email($email)->value('token'),
+        );
     }
 }
