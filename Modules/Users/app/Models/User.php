@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -85,5 +86,17 @@ final class User extends Authenticatable
     protected function guest(Builder $query): void
     {
         $query->where('role', UserRole::GUEST);
+    }
+
+    /**
+     * @return Attribute<string, void>
+     */
+    public function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn($_, $attrs) => $attrs['first_name'] .
+                ' ' .
+                $attrs['last_name'],
+        )->shouldCache();
     }
 }
