@@ -3,13 +3,16 @@
 namespace $NAMESPACE$;
 
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Translatable\HasTranslations;
 // use $MODULE_NAMESPACE$\$MODULE$\Database\Factories\$NAME$Factory;
+// use $MODULE_NAMESPACE$\$MODULE$\Transformers\$NAME$Transformer;
 
 #[UseFactory($NAME$Factory::class)]
+#[UseResource($NAME$Transformer::class)]
 class $CLASS$ extends Model
 {
     /** @use HasFactory<$NAME$Factory> */

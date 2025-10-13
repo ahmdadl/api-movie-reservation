@@ -24,6 +24,7 @@ class CityFactory extends Factory
     {
         return [
             'title' => fake()->sentence,
+            'state' => fake()->state,
             'is_active' => true,
         ];
     }

@@ -2,11 +2,10 @@
 
 namespace $CLASS_NAMESPACE$;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
-class $CLASS$ extends Controller
+class $CLASS$
 {
     /**
      * Display a listing of the resource.

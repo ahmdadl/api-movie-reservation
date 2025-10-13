@@ -101,3 +101,10 @@ function asTestGuest(
 
     return $user;
 }
+
+function getPublicToke(): array
+{
+    return [
+        'x-public-token' => config('auth.public-token'),
+    ];
+}

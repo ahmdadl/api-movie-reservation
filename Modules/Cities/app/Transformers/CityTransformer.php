@@ -1,11 +1,11 @@
 <?php
 
-namespace $NAMESPACE$;
+namespace Modules\Cities\Transformers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class $CLASS$ extends JsonResource
+class CityTransformer extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +15,7 @@ class $CLASS$ extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'createdAt' => $this->created_at,
+            'state' => $this->state,
         ];
     }
 }
