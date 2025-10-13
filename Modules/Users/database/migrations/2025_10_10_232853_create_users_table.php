@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Schema;
 use Modules\Users\Enums\UserRole;
 use Modules\Users\ValueObjects\UserTotals;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
