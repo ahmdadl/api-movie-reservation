@@ -1,13 +1,13 @@
 <?php
 
-namespace $NAMESPACE$;
+namespace Modules\Cinemas\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
-class $CLASS$ extends ServiceProvider
+class RouteServiceProvider extends ServiceProvider
 {
-    protected string $name = '$MODULE$';
+    protected string $name = 'Cinemas';
 
     /**
      * Called before routes are registered.
@@ -35,7 +35,9 @@ class $CLASS$ extends ServiceProvider
      */
     protected function mapWebRoutes(): void
     {
-        Route::middleware('web')->group(module_path($this->name, '$WEB_ROUTES_PATH$'));
+        Route::middleware('web')->group(
+            module_path($this->name, '/routes/web.php'),
+        );
     }
 
     /**
@@ -45,6 +47,9 @@ class $CLASS$ extends ServiceProvider
      */
     protected function mapApiRoutes(): void
     {
-        Route::middleware('api')->prefix('api')->name('api.')->group(module_path($this->name, '$API_ROUTES_PATH$'));
+        Route::middleware('api')
+            ->prefix('api')
+            ->name('api.')
+            ->group(module_path($this->name, '/routes/api.php'));
     }
 }

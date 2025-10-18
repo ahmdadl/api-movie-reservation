@@ -2,5 +2,6 @@
     "Core": true,
     "Uploads": true,
     "Users": true,
-    "Cities": true
+    "Cities": true,
+    "Cinemas": true
 }
