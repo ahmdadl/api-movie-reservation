@@ -3,5 +3,6 @@
     "Uploads": true,
     "Users": true,
     "Cities": true,
-    "Cinemas": true
+    "Cinemas": true,
+    "Screens": true
 }

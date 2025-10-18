@@ -1,0 +1,30 @@
+{
+    "name": "ahmdadl/screens",
+    "description": "",
+    "authors": [
+        {
+            "name": "Ahmed Adel",
+            "email": "ahmdadl.dev@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Screens\\": "app/",
+            "Modules\\Screens\\Database\\Factories\\": "database/factories/",
+            "Modules\\Screens\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Screens\\Tests\\": "tests/"
+        }
+    }
+}
