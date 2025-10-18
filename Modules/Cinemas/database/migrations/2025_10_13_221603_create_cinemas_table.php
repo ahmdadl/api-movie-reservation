@@ -20,7 +20,7 @@ return new class extends Migration {
                 ->noActionOnDelete();
             $table->string('title');
             $table->jsonb('address');
-            $table->jsonb('phone');
+            $table->string('phone', 20)->index();
             $table->string('email')->index();
             $table->activeState();
             $table->timestamps();

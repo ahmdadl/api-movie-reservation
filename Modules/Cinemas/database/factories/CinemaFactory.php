@@ -29,7 +29,7 @@ class CinemaFactory extends Factory
             'city_id' => fn() => City::factory(),
             'title' => fake()->company(),
             'address' => CinemaAddress::defaults(),
-            'phone' => fn() => fake()->phoneNumber(),
+            'phone' => fn() => fake()->e164PhoneNumber,
             'email' => fn() => fake()->unique()->safeEmail(),
             'is_active' => true,
         ];

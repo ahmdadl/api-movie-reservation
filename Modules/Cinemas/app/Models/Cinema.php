@@ -4,6 +4,7 @@ namespace Modules\Cinemas\Models;
 
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,6 +32,26 @@ class Cinema extends Model
         return [
             'address' => AsCinemaAddress::class,
         ];
+    }
+
+    /** attributes */
+
+    /**
+     * @return Attribute<\Propaganistas\LaravelPhone\PhoneNumber, void>
+     */
+    public function phone(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                $phone = phone($value);
+
+                if (!$phone->isValid()) {
+                    throw new \InvalidArgumentException('Invalid phone number');
+                }
+
+                return $phone;
+            },
+        );
     }
 
     /** RELATIONS */
