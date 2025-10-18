@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Translatable\HasTranslations;
+use Modules\Cinemas\Casts\AsCinemaAddress;
 use Modules\Cinemas\Database\Factories\CinemaFactory;
 use Modules\Cities\Models\City;
 
@@ -28,7 +28,9 @@ class Cinema extends Model
      */
     protected function casts(): array
     {
-        return [];
+        return [
+            'address' => AsCinemaAddress::class,
+        ];
     }
 
     /** RELATIONS */

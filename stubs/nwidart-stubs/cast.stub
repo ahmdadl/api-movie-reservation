@@ -14,7 +14,13 @@ class $CLASS$ implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $value;
+        // @phpstan-ignore-next-line
+        // if (!json_validate($value)) {
+        //     throw new \Exception('CinemaAddress value is invalid JSON format');
+        // }
+
+        // // @phpstan-ignore-next-line
+        // return CinemaAddress::fromArray(json_decode($value, true));
     }
 
     /**
@@ -24,6 +30,16 @@ class $CLASS$ implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $value;
+        if (is_array($value)) {
+            return json_encode($value);
+        }
+
+        // if (!$value instanceof CinemaAddress) {
+        //     throw new InvalidArgumentException(
+        //         'The provided value is not an instance of CinemaAddress.',
+        //     );
+        // }
+
+        return json_encode($value->toArray());
     }
 }

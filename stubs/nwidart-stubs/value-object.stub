@@ -1,0 +1,42 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+final class $CLASS$
+{
+    public function __construct(
+        // 
+    ) {
+        // 
+    }
+
+    public static function toArray(): array
+    {
+        return [];
+    }
+
+    /**
+     * Create a $CLASS$ object from an array
+     */
+    public static function fromArray(array $data): self
+    {
+        return new self(
+            // 
+        );
+    }
+
+    public static function defaults(): array
+    {
+        return [];
+    }
+
+    /**
+     * turn object to json string
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return (string) json_encode($this->toArray());
+    }
+}

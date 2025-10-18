@@ -1,0 +1,55 @@
+<?php
+
+namespace Modules\Cinemas\Casts;
+
+use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
+use Modules\Cinemas\ValueObjects\CinemaAddress;
+
+class AsCinemaAddress implements CastsAttributes
+{
+    /**
+     * Cast the given value.
+     *
+     * @param  array<string, mixed>  $attributes
+     */
+    public function get(
+        Model $model,
+        string $key,
+        mixed $value,
+        array $attributes,
+    ): CinemaAddress {
+        // @phpstan-ignore-next-line
+        if (!json_validate($value)) {
+            throw new \Exception('CinemaAddress value is invalid JSON format');
+        }
+
+        // @phpstan-ignore-next-line
+        return CinemaAddress::fromArray(json_decode($value, true));
+    }
+
+    /**
+     * Prepare the given value for storage.
+     *
+     * @param  array<string, mixed>  $attributes
+     */
+    public function set(
+        Model $model,
+        string $key,
+        mixed $value,
+        array $attributes,
+    ): string {
+        if (is_array($value)) {
+            return json_encode($value);
+        }
+
+        if (!$value instanceof CinemaAddress) {
+            throw new InvalidArgumentException(
+                'The provided value is not an instance of CinemaAddress.',
+            );
+        }
+
+        return json_encode($value->toArray());
+    }
+}

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Modules\Core\Console\ModuleDtoMakeCommand;
+use Modules\Core\Console\ModuleValueObjectMakeCommand;
 use Nwidart\Modules\Activators\FileActivator;
 use Nwidart\Modules\Providers\ConsoleServiceProvider;
 
@@ -32,7 +33,8 @@ return [
             'routes/web' => 'routes/web.php',
             'routes/api' => 'routes/api.php',
             'views/index' => 'resources/views/index.blade.php',
-            'views/master' => 'resources/views/components/layouts/master.blade.php',
+            'views/master' =>
+                'resources/views/components/layouts/master.blade.php',
             'scaffold/config' => 'config/config.php',
             'composer' => 'composer.json',
             'assets/js/app' => 'resources/assets/js/app.js',
@@ -262,7 +264,10 @@ return [
     |
     */
     'commands' => ConsoleServiceProvider::defaultCommands()
-        ->merge([ModuleDtoMakeCommand::class])
+        ->merge([
+            ModuleDtoMakeCommand::class,
+            ModuleValueObjectMakeCommand::class,
+        ])
         ->toArray(),
 
     /*

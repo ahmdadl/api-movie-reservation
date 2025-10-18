@@ -16,11 +16,11 @@ return new class extends Migration {
             $table
                 ->foreignUuid('parent_cinema_id')
                 ->nullable()
-                ->constrained()
+                ->constrained('cinemas')
                 ->noActionOnDelete();
             $table->string('title');
-            $table->json('address');
-            $table->string('phone');
+            $table->jsonb('address');
+            $table->jsonb('phone');
             $table->string('email')->index();
             $table->activeState();
             $table->timestamps();
