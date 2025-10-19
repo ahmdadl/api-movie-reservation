@@ -22,14 +22,6 @@ class Genre extends Model
     /** @use HasFactory<GenreFactory> */
     use HasFactory, HasUuids, SoftDeletes, HasActiveState, Sluggable;
 
-    /**
-     * cast fields
-     */
-    // protected function casts(): array
-    // {
-    //     return [];
-    // }
-
     public function sluggable(): array
     {
         return [
