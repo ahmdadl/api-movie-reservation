@@ -1,0 +1,30 @@
+{
+    "name": "ahmdadl/genres",
+    "description": "",
+    "authors": [
+        {
+            "name": "Ahmed Adel",
+            "email": "ahmdadl.dev@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Genres\\": "app/",
+            "Modules\\Genres\\Database\\Factories\\": "database/factories/",
+            "Modules\\Genres\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Genres\\Tests\\": "tests/"
+        }
+    }
+}
