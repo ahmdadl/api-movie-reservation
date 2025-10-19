@@ -17,11 +17,10 @@ use Modules\Core\Classes\Attributes\HasSlug;
 
 // #[UseResource(GenreTransformer::class)]
 #[UseFactory(GenreFactory::class)]
-#[HasSlug('title')]
 class Genre extends Model
 {
     /** @use HasFactory<GenreFactory> */
-    use HasFactory, HasUuids, SoftDeletes, HasActiveState;
+    use HasFactory, HasUuids, SoftDeletes, HasActiveState, Sluggable;
 
     /**
      * cast fields
@@ -30,4 +29,13 @@ class Genre extends Model
     // {
     //     return [];
     // }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+            ],
+        ];
+    }
 }
