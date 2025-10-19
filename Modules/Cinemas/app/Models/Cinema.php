@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Cinemas\Casts\AsCinemaAddress;
 use Modules\Cinemas\Database\Factories\CinemaFactory;
 use Modules\Cities\Models\City;
+use Modules\Core\ValueObjects\AsPhoneNumber;
 
 // use Modules\Cinemas\Transformers\CinemaTransformer;
 
@@ -31,28 +32,11 @@ class Cinema extends Model
     {
         return [
             'address' => AsCinemaAddress::class,
+            'phone' => AsPhoneNumber::class,
         ];
     }
 
     /** attributes */
-
-    /**
-     * @return Attribute<\Propaganistas\LaravelPhone\PhoneNumber, void>
-     */
-    public function phone(): Attribute
-    {
-        return Attribute::make(
-            get: function ($value) {
-                $phone = phone($value);
-
-                if (!$phone->isValid()) {
-                    throw new \InvalidArgumentException('Invalid phone number');
-                }
-
-                return $phone;
-            },
-        );
-    }
 
     /** RELATIONS */
 
