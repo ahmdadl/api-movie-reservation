@@ -12,13 +12,14 @@ use Modules\Core\Models\Scopes\HasActiveState;
 use Spatie\Translatable\HasTranslations;
 use Modules\Genres\Database\Factories\GenreFactory;
 // use Modules\Genres\Transformers\GenreTransformer;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 // #[UseResource(GenreTransformer::class)]
 #[UseFactory(GenreFactory::class)]
 class Genre extends Model
 {
     /** @use HasFactory<GenreFactory> */
-    use HasFactory, HasUuids, SoftDeletes, HasActiveState;
+    use HasFactory, HasUuids, SoftDeletes, HasActiveState, Sluggable;
 
     /**
      * cast fields
@@ -28,5 +29,12 @@ class Genre extends Model
     //     return [];
     // }
 
-    //
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+            ],
+        ];
+    }
 }
