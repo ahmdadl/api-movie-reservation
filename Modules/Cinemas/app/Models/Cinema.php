@@ -15,6 +15,7 @@ use Modules\Cinemas\Casts\AsCinemaAddress;
 use Modules\Cinemas\Database\Factories\CinemaFactory;
 use Modules\Cities\Models\City;
 use Modules\Core\ValueObjects\AsPhoneNumber;
+use Modules\Screens\Models\Screen;
 
 // use Modules\Cinemas\Transformers\CinemaTransformer;
 
@@ -62,5 +63,13 @@ class Cinema extends Model
     public function cinemas(): HasMany
     {
         return $this->hasMany(self::class);
+    }
+
+    /**
+     * @return HasMany<Screen, $this>
+     */
+    public function screens(): HasMany
+    {
+        return $this->hasMany(Screen::class);
     }
 }

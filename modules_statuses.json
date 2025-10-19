@@ -4,5 +4,6 @@
     "Users": true,
     "Cities": true,
     "Cinemas": true,
-    "Screens": true
+    "Screens": true,
+    "Seats": true
 }
