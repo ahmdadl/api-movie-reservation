@@ -4,6 +4,7 @@ namespace Modules\Screens\Transformers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Cinemas\Transformers\CinemaTransformer;
 
 class ScreenTransformer extends JsonResource
 {
@@ -19,7 +20,7 @@ class ScreenTransformer extends JsonResource
             'totalSeats' => $this->total_seats,
             'createdAt' => $this->created_at,
 
-            // 'cinema' => new CinemaTransformer($this->whenLoaded('cinema')),
+            'cinema' => new CinemaTransformer($this->whenLoaded('cinema')),
         ];
     }
 }
